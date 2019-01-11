@@ -1,0 +1,58 @@
+!DOCTYPE html>
+<html>
+<head>
+  <title>Page Title</title>
+</head>
+<body>
+    <script type="text/javascript">
+        computerGo = "" 
+        function computerPLay() {
+            let randomNumber = Math.floor((Math.random() * 3) + 1);
+            if (randomNumber == 1) {
+                computerGo = "rock";
+            } else if (randomNumber == 2) {
+                computerGo = "paper";
+            } else {
+                computerGo = "scissors";
+            }
+            return computerGo;
+        }
+
+        function playRound(playerSelection, computerSelection = computerGo) {
+            playerSelection = playerSelection.toLowerCase();
+            switch (playerSelection) {
+                case 'rock':
+                    if (computerSelection == 'rock') {
+                        console.log("It's a draw. You both selected Rock.");
+                    } else if (computerSelection == 'paper') {
+                        console.log("You lose. Paper beats Rock.");
+                    } else {
+                        console.log("You win. Rock beats Scissors.");
+                    }
+                break;
+                case 'paper':
+                    if (computerSelection == 'rock') {
+                        console.log("You win. Paper beats Rock.");
+                    } else if (computerSelection == 'paper') {
+                        console.log("It's a draw. You both selected Paper.");
+                    } else {
+                        console.log("You lose. Scissors beats Paper.");
+                    }
+                break;
+                case 'scissors':
+                    if (computerSelection == 'rock') {
+                        console.log("You lose. Rock beats Scissors.");
+                    } else if (computerSelection == 'paper') {
+                        console.log("You win. Scissors beats Paper.");
+                    } else {
+                        console.log("It's a draw. You both selected Scissors.");
+                    }
+                break;
+                default:
+                console.log("Invalid entry");
+                break;
+            }
+        }   
+    </script>
+</body>
+</html> 
