@@ -6,12 +6,12 @@
 <body>
     <script type="text/javascript">
         function game() {
-            for (let counter = 0; counter < 5; counter++) {
+            let playerWins = 0;
+            let computerWins = 0;
+            for (let counter = 0; counter <= 4; counter++) {
                 let computerGo = "";
-                    let playerGo = prompt("Enter your selection");
-                    let playerWins = 0;
-                    let computerWins = 0;
-                if (counter < 5) {
+                let playerGo = prompt("Enter your selection");
+                if (counter < 4) {
                     computerPLay()
                     playRound()
                     console.log("Number of goes left = " + (4 - counter));
@@ -19,7 +19,6 @@
                     console.log("Game Over.");
                     console.log("You scored " + playerWins + ". " + "Computer scored " + computerWins + ".");
                 }
-       
             function computerPLay() {
                 let randomNumber = Math.floor((Math.random() * 3) + 1);
                 if (randomNumber == 1) {
