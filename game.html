@@ -4,23 +4,29 @@
   <title>Page Title</title>
 </head>
 <body>
+    <br/>
+    
+    <div id="container">
+        <button id="rock">ROCK</button>  
+        <button id="paper">PAPER</button>   
+        <button id="scissors">SCISSORS</button>   
+    </div>
+
     <script type="text/javascript">
-        function game() {
-            let playerWins = 0;
-            let computerWins = 0;
-            for (let counter = 0; counter <= 4; counter++) {
-                let computerGo = "";
-                let playerGo = prompt("Enter your selection");
-                if (counter < 4) {
-                    computerPLay()
-                    playRound()
-                    console.log("Number of goes left = " + (4 - counter));
-                } else {
-                    console.log("Game Over.");
-                    console.log("You scored " + playerWins + ". " + "Computer scored " + computerWins + ".");
-                }
-            function computerPLay() {
-                let randomNumber = Math.floor((Math.random() * 3) + 1);
+        
+        let computerGo = "";
+        let playerGo = "";
+
+            const buttons = document.querySelectorAll('button');
+            buttons.forEach((button) => {
+                button.addEventListener('click', (e) => {
+                    playerGo = button.id;
+                    console.log("Player Go = " + playerGo); 
+                    return playerGo; 
+                });
+            });
+
+            let randomNumber = Math.floor((Math.random() * 3) + 1);
                 if (randomNumber == 1) {
                     computerGo = "rock";
                 } else if (randomNumber == 2) {
@@ -28,52 +34,66 @@
                 } else {
                     computerGo = "scissors";
                 }
-                return computerGo;
+                console.log("Computer Go = " + computerGo); 
+
+        function game() {
+           playRound(playerGo, computerGo);
+        }
+
+        function playRound(playerSelection, computerSelection) {
+            playerSelection = playerSelection.toLowerCase();
+            switch (playerSelection) {
+                case 'rock':
+                    if (computerSelection == 'rock') {
+                        console.log("It's a draw. You both selected Rock.");
+                    } else if (computerSelection == 'paper') {
+                        console.log("You lose. Paper beats Rock.");
+                    } else {
+                        console.log("You win. Rock beats Scissors.");
+                    }
+                break;
+                case 'paper':
+                    if (computerSelection == 'rock') {
+                        console.log("You win. Paper beats Rock.");
+
+                    } else if (computerSelection == 'paper') {
+                        console.log("It's a draw. You both selected Paper.");
+                    } else {
+                        console.log("You lose. Scissors beats Paper.");
+
+                    }
+                break;
+                case 'scissors':
+                    if (computerSelection == 'rock') {
+                        console.log("You lose. Rock beats Scissors.");
+ 
+                    } else if (computerSelection == 'paper') {
+                        console.log("You win. Scissors beats Paper.");
+
+                    } else {
+                        console.log("It's a draw. You both selected Scissors.");
+                    }
+                break;
+                default:
+                console.log("Invalid entry");
+                break;
+            }
+        }      
+
+     window.addEventListener("click", game);
+
+            let playerWins = 0;
+            let computerWins = 0;
+            for (let counter = 0; counter <= 4; counter++) {
+                if (counter < 4) {
+                    console.log("Number of goes left = " + (4 - counter));
+                } else {
+                    console.log("Game Over.");
+                    console.log("You scored " + playerWins + ". " + "Computer scored " + computerWins + ".");
+                }
             }
         
-            function playRound(playerSelection = playerGo, computerSelection = computerGo) {
-                playerSelection = playerSelection.toLowerCase();
-                switch (playerSelection) {
-                    case 'rock':
-                        if (computerSelection == 'rock') {
-                            console.log("It's a draw. You both selected Rock.");
-                        } else if (computerSelection == 'paper') {
-                            console.log("You lose. Paper beats Rock.");
-                            computerWins++
-                        } else {
-                            console.log("You win. Rock beats Scissors.");
-                            playerWins++
-                        }
-                    break;
-                    case 'paper':
-                        if (computerSelection == 'rock') {
-                            console.log("You win. Paper beats Rock.");
-                            playerWins++
-                        } else if (computerSelection == 'paper') {
-                            console.log("It's a draw. You both selected Paper.");
-                        } else {
-                            console.log("You lose. Scissors beats Paper.");
-                            computerWins++
-                        }
-                    break;
-                    case 'scissors':
-                        if (computerSelection == 'rock') {
-                            console.log("You lose. Rock beats Scissors.");
-                            computerWins++
-                        } else if (computerSelection == 'paper') {
-                            console.log("You win. Scissors beats Paper.");
-                            playerWins++
-                        } else {
-                            console.log("It's a draw. You both selected Scissors.");
-                        }
-                    break;
-                    default:
-                    console.log("Invalid entry");
-                    break;
-                }
-            }   
-        }
-    }    
+        
     </script>
 </body>
 </html> 
