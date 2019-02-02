@@ -12,11 +12,19 @@
         <button id="scissors">SCISSORS</button>   
     </div>
 
+    <div id="scores">
+        <h3>Player Score:</h3>
+        <p id="playerscore"></p>
+        <h3>Computer Score:</h3>
+        <p id="computerscore"></p>
+    </div>
+
     <script type="text/javascript">
         
         let computerGo = "";
-        let playerGo = "";
-
+        let playerGo = "";        
+            
+            // Add event listeners to selection buttons to set playerGo variable
             const buttons = document.querySelectorAll('button');
             buttons.forEach((button) => {
                 button.addEventListener('click', (e) => {
@@ -25,7 +33,9 @@
                     return playerGo; 
                 });
             });
-
+            
+            // Add randomised computer selection
+            function computerRound() {
             let randomNumber = Math.floor((Math.random() * 3) + 1);
                 if (randomNumber == 1) {
                     computerGo = "rock";
@@ -35,12 +45,23 @@
                     computerGo = "scissors";
                 }
                 console.log("Computer Go = " + computerGo); 
-
+            }
+        
+        // Play five round game
         function game() {
-           playRound(playerGo, computerGo);
-        }
 
+            let playerWins = 0;
+            let computerWins = 0;
+            for (let counter = 0; counter <= 4; counter++) {
+                computerRound();
+                playRound(playerGo, computerGo);
+                counter++
+                } 
+            }
+        
+        // Play one round
         function playRound(playerSelection, computerSelection) {
+            
             playerSelection = playerSelection.toLowerCase();
             switch (playerSelection) {
                 case 'rock':
@@ -48,28 +69,30 @@
                         console.log("It's a draw. You both selected Rock.");
                     } else if (computerSelection == 'paper') {
                         console.log("You lose. Paper beats Rock.");
+                        computerWins++
                     } else {
                         console.log("You win. Rock beats Scissors.");
+                        playerWins++
                     }
                 break;
                 case 'paper':
                     if (computerSelection == 'rock') {
                         console.log("You win. Paper beats Rock.");
-
+                        playerWins++
                     } else if (computerSelection == 'paper') {
                         console.log("It's a draw. You both selected Paper.");
                     } else {
                         console.log("You lose. Scissors beats Paper.");
-
+                        computerWins++
                     }
                 break;
                 case 'scissors':
                     if (computerSelection == 'rock') {
                         console.log("You lose. Rock beats Scissors.");
- 
+                        computerWins++
                     } else if (computerSelection == 'paper') {
                         console.log("You win. Scissors beats Paper.");
-
+                        playerWins++
                     } else {
                         console.log("It's a draw. You both selected Scissors.");
                     }
@@ -80,10 +103,11 @@
             }
         }      
 
+     // Add event listener to play a game when a click occurs
      window.addEventListener("click", game);
 
-            let playerWins = 0;
-            let computerWins = 0;
+            
+            /*
             for (let counter = 0; counter <= 4; counter++) {
                 if (counter < 4) {
                     console.log("Number of goes left = " + (4 - counter));
@@ -92,7 +116,7 @@
                     console.log("You scored " + playerWins + ". " + "Computer scored " + computerWins + ".");
                 }
             }
-        
+            */ 
         
     </script>
 </body>
